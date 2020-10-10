@@ -1,4 +1,4 @@
-package entity.dto.Rest;
+package core.Rest;
 
 public class DBRestController {
 }
