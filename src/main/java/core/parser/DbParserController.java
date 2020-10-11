@@ -1,4 +1,4 @@
-package entity.dto.Parser;
+package core.parser;
 
-public class DBParserController {
+public class DbParserController {
 }

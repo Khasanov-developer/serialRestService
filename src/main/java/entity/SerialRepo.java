@@ -1,4 +1,4 @@
 package entity;
 
-public interface SerialService {
+public interface SerialRepo {
 }

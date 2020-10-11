@@ -1,4 +1,4 @@
-package entity.dto;
+package core;
 
-public interface DBService {
+public interface DbService {
 }

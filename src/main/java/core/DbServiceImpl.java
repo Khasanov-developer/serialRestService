@@ -1,4 +1,4 @@
-package entity.dto;
+package core;
 
-public class DBServiceImpl {
+public class DbServiceImpl {
 }

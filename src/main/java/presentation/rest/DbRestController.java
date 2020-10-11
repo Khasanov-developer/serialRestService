@@ -1,4 +1,4 @@
-package core.Rest;
+package presentation.rest;
 
-public class DBRestController {
+public class DbRestController {
 }

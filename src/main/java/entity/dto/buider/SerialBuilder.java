@@ -1,4 +1,4 @@
-package core.Parser;
+package entity.dto.buider;
 
-public class SerialBuilder implements IBuildSerial {
+public class SerialBuilder implements BuildSerial {
 }

@@ -1,4 +1,4 @@
-package entity.dto.Buider;
+package entity.dto.buider;
 
-public interface IBuildSerial {
+public interface BuildSerial {
 }
