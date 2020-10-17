@@ -1,17 +1,11 @@
 package core.parcer.page;
 
-import core.parser.KinoNewsJsoupParser;
-import core.parser.KinoNewsParser;
-import core.parser.ParseSerial;
 import core.parser.page.GetPage;
 import core.parser.page.GetPageImpl;
-import entity.dto.Serial;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
