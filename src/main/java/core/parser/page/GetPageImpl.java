@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class GetPageImpl implements GetPage<Document> {
 
+    @Override
     public Document getPage(String url) {
         Document doc = null;
         try {
