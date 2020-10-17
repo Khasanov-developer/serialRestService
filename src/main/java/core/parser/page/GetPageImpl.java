@@ -5,8 +5,9 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-public class GetPageImpl implements GetPage {
+public class GetPageImpl implements GetPage<Document> {
 
+    @Override
     public Document getPage(String url) {
         Document doc = null;
         try {
