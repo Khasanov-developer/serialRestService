@@ -1,35 +1,52 @@
 package core.collector;
 
-import entity.dto.Seria;
-import org.jsoup.Jsoup;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class CollectKinoNewsSerialLinks {
+public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
 
-    public void collectString() throws IOException {
-        //Подключение к ссылке
-        Document linksDoc = Jsoup.connect("https://www.kinonews.ru/serials-year1950/").userAgent("Mozilla").get();
+
+    @Override
+    public List<String> collectLinks(Document html) {
         //Выборка элементов a из div (порядкового номера 1)
-        Elements links = linksDoc.select("div.zhanr_left div:eq(1) a");
+        Elements links = html.select("div.zhanr_left div:eq(1) a");
+        List<String> serialsLinks = new ArrayList<>();
+        ;
         //Заносим линки в массив
         if (links.size() > 0) {
-            List<String> serialsLinks = new ArrayList<>();
             for (Element e : links) {
                 //Используем аттрибут для получения полной ссылки
                 serialsLinks.add(e.attr("abs:href"));
-            } ;
-            System.out.println(serialsLinks);
+            }
         }
-        //Ищем и достаем ссылку на следующий год
-        Elements nextYearLinks = linksDoc.select("div.block-page-new a:eq(1)");
+        return serialsLinks;
+    }
+
+
+    public String getNextYearLink(Document html) {
+        Elements nextYearLinks = html.select("div.block-page-new a:eq(1)");
         String nextYearLink = nextYearLinks.attr("abs:href");
-        System.out.println(nextYearLink);
+        return nextYearLink;
+    }
+
+    public String getCurrentYear(Document html) {
+        Elements years = html.select("div.block-page-new h1");
+        String currentYear = years.first().text();
+        Pattern yearPattern = Pattern.compile("\\d+");
+        Matcher yearMatcher = yearPattern.matcher(currentYear);
+        while (yearMatcher.find()) {
+            currentYear = yearMatcher.group(0);
         }
+        return currentYear;
+    }
 
 }
+
