@@ -12,7 +12,7 @@ public class Serial {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
     @Column
     private String description;
@@ -31,7 +31,7 @@ public class Serial {
     @Column(name ="seasons_count")
     private Integer seasonsCount;
 
-    @OneToMany(mappedBy = "serial", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "serial", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Season> seasonList;
 
     @ElementCollection

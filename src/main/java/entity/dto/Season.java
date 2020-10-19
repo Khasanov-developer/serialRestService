@@ -28,7 +28,7 @@ public class Season {
     @JoinColumn(name = "serial_id")
     private Serial serial;
 
-    @OneToMany(mappedBy = "season", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seria> seriaList;
 
     public Integer getNumber() {
