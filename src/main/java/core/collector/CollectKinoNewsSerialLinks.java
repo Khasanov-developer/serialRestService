@@ -54,15 +54,27 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
             links.add(e.attr("abs:href"));
         }
 
-        //Получение ссылки на следующую страницу !!! Не работает пока что
-        Elements nextPageLinkElements = html.select("li.img-page > a");
-        if (nextPageLinkElements.size() > 0) {
-            Document nextHtml = getPage.getPage(nextPageLinkElements.get(0).text());
-            links.addAll(getCurrentYearSerialLinks(nextHtml));
+        //Получение ссылки на следующую страницу
+        //Получаем изображение стрелочки перехода на следующую страницу страницы
+        Elements img = html.select("li.img-page > a > img");
+        if (img.size() > 0) {
+            String src = img.first().attr("abs:src");
+            System.out.println(src);
+            //Создаем строку ссылки на активную кнопку
+            String link = "https://www.kinonews.ru/images2/page-right-active.png";
+            System.out.println(link == src.intern());
+            //Сравниваем спарсенную ссылку с сылкой на активную кнопку (проверяем активна ли кнопка)
+            if (link == src.intern()) {
+                //Если кнопка активна обновляем ссылку на страницу и парсим
+                Elements nextPageLinkElements = html.select("li.img-page > a");
+                if (elements.size() > 0) {
+                    Document nextHtml = getPage.getPage(nextPageLinkElements.get(0).attr("abs:href"));
+                    links.addAll(getCurrentYearSerialLinks(nextHtml));
+                }
+            }
         }
         return links;
     }
-
 
     public String getNextYearLink(Document html) {
         Elements nextYearLinks = html.select("div.block-page-new a:eq(1)");
