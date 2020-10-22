@@ -35,7 +35,7 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
         int year = parseInt(getCurrentYear(html));
 
         Document currentHtml = html;
-        while (year < 2020) {
+        while (year < 2021) {
             allLinks.addAll(getCurrentYearSerialLinks(currentHtml));
             String nextYearLink = getNextYearLink(html);
             year++;
@@ -49,7 +49,7 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
         List<String> links = new ArrayList<>();
 
         //Ссылки для текущей страницы списка сериалов
-        Elements elements = html.select("div.zhanr_left div:eq(1) a");
+        Elements elements = html.select("div.zhanr_left > a");
         for (Element e : elements) {
             links.add(e.attr("abs:href"));
         }
@@ -59,12 +59,10 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
         Elements img = html.select("li.img-page > a > img");
         if (img.size() > 0) {
             String src = img.first().attr("abs:src");
-            System.out.println(src);
             //Создаем строку ссылки на активную кнопку
             String link = "https://www.kinonews.ru/images2/page-right-active.png";
-            System.out.println(link == src.intern());
             //Сравниваем спарсенную ссылку с сылкой на активную кнопку (проверяем активна ли кнопка)
-            if (link == src.intern()) {
+            if (link.equals(src)) {
                 //Если кнопка активна обновляем ссылку на страницу и парсим
                 Elements nextPageLinkElements = html.select("li.img-page > a");
                 if (elements.size() > 0) {
