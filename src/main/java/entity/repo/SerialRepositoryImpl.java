@@ -5,7 +5,6 @@ import entity.dto.Serial;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,13 +40,13 @@ public class SerialRepositoryImpl implements SerialRepository{
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        if (Objects.nonNull(getSerialByName(serial.getName()))) {
-            serial = em.merge(serial);
-        } else {
+        if (Objects.isNull(getSerialByName(serial.getName()))) {
             em.persist(serial);
+        } else {
+            serial = em.merge(serial);
         }
-
         transaction.commit();
+
         return serial;
     }
 
@@ -63,5 +62,12 @@ public class SerialRepositoryImpl implements SerialRepository{
             }
             transaction.commit();
         }
+    }
+
+    @Override
+    public List<Serial> getAll() {
+        List<Serial> serials = em.createQuery("FROM Serial", Serial.class)
+                .getResultList();
+        return serials;
     }
 }

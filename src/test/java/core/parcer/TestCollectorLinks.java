@@ -13,9 +13,29 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TestCollectorLinks {
+
+    private static final SerialRepository repository = new SerialRepositoryImpl();
+
+
+//    private static Set<Serial> filterSerialsInDB(Set<Serial> serials) {
+//        List<Serial> serialsFromDb = repository.getAll();
+//
+//        Map<String, Serial> serialsMap = new HashMap<>();
+//        for (Serial serial : serials) {
+//            serialsMap.put(serial.getName(), serial);
+//        }
+//        serials = null;
+//
+//        for (Serial serial: serialsFromDb) {
+//            serialsMap.remove(serial.getName());
+//        }
+//
+//        return new HashSet<>(serialsMap.values());
+//    }
 
     // Сбор ссылок и парсинг сериалов и сохранение в базу
     public static void main(String[] args) throws IOException {
@@ -27,7 +47,6 @@ public class TestCollectorLinks {
         GetPage<Document> getPage = new GetPageImpl();
         KinoNewsParser<Document> parser;
 
-        SerialRepository repository = new SerialRepositoryImpl();
         int counter = 0;
 
         for (String link : links) {

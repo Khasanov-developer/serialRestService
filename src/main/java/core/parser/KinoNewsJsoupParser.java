@@ -195,22 +195,24 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
         Elements tdElems = seriaElement.getElementsByTag("td");
 
         if (tdElems.size() > 0) {
-            String numberData = tdElems.get(0).text();
-            Integer number = Integer.parseInt(numberData.split(" ")[1]);
-            seria.setNumber(number);
+            if (tdElems.get(0).text().matches("Серия\\s\\d+")) {
+                String numberData = tdElems.get(0).text();
+                Integer number = Integer.parseInt(numberData.split(" ")[1]);
+                seria.setNumber(number);
 
-            String seriaData = tdElems.get(1).text();
-            Pattern pattern = Pattern.compile("(?<name>.+),\\s*(?<date>\\S+)");
-            Matcher matcher = pattern.matcher(seriaData);
+                String seriaData = tdElems.get(1).text();
+                Pattern pattern = Pattern.compile("(?<name>.+),\\s*(?<date>\\S+)");
+                Matcher matcher = pattern.matcher(seriaData);
 
-            while (matcher.find()) {
-                seria.setName(matcher.group("name"));
-                try {
-                    String date = matcher.group("date");
-                    if (date.matches(datePattern))
-                        seria.setDate(new java.sql.Date(dateFormat.parse(date).getTime()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                while (matcher.find()) {
+                    seria.setName(matcher.group("name"));
+                    try {
+                        String date = matcher.group("date");
+                        if (date.matches(datePattern))
+                            seria.setDate(new java.sql.Date(dateFormat.parse(date).getTime()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

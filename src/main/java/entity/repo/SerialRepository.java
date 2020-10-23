@@ -2,6 +2,8 @@ package entity.repo;
 
 import entity.dto.Serial;
 
+import java.util.List;
+
 public interface SerialRepository {
 
     Serial getSerialById(Long id);
@@ -12,4 +14,5 @@ public interface SerialRepository {
 
     void deleteSerial(Serial serial);
 
+    List<Serial> getAll();
 }
