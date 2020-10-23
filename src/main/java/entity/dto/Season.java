@@ -2,7 +2,7 @@ package entity.dto;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Table(name = "season")
 @Entity
@@ -29,7 +29,7 @@ public class Season {
     private Serial serial;
 
     @OneToMany(mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seria> seriaList;
+    private Set<Seria> seriaList;
 
     public Integer getNumber() {
         return number;
@@ -63,11 +63,11 @@ public class Season {
         this.seriesCount = seriesCount;
     }
 
-    public List<Seria> getSeriaList() {
+    public Set<Seria> getSeriaList() {
         return seriaList;
     }
 
-    public void setSeriaList(List<Seria> seriaList) {
+    public void setSeriaList(Set<Seria> seriaList) {
         this.seriaList = seriaList;
     }
 

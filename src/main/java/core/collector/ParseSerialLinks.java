@@ -1,7 +1,7 @@
 package core.collector;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ParseSerialLinks<From> {
-    List<String> getCurrentYearSerialLinks(From html);
+    Set<String> getCurrentYearSerialLinks(From html);
 }

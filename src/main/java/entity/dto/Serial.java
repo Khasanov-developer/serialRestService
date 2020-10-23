@@ -2,7 +2,7 @@ package entity.dto;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Table(name = "serial")
 @Entity
@@ -14,13 +14,14 @@ public class Serial {
 
     @Column(nullable = false)
     private String name;
-    @Column
+
+    @Column(length = 2000)
     private String description;
 
     @ElementCollection
     @CollectionTable(name = "genres", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "genre")
-    private List<String> genreList;
+    private Set<String> genreList;
 
     @Column(name = "start_year")
     private String startYear;
@@ -28,51 +29,51 @@ public class Serial {
     @Column(name = "finish_year")
     private String finishYear;
 
-    @Column(name ="seasons_count")
+    @Column(name = "seasons_count")
     private Integer seasonsCount;
 
     @OneToMany(mappedBy = "serial", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Season> seasonList;
+    private Set<Season> seasonList;
 
     @ElementCollection
     @CollectionTable(name = "creators", joinColumns = @JoinColumn(name = "serial_id"))
-    @Column(name ="creator")
-    private List<String> creatorList;
+    @Column(name = "creator")
+    private Set<String> creatorList;
 
     @ElementCollection
     @CollectionTable(name = "screenwriters", joinColumns = @JoinColumn(name = "serial_id"))
-    @Column(name ="screenwriter")
-    private List<String> screenwriterList;
+    @Column(name = "screenwriter")
+    private Set<String> screenwriterList;
 
     @ElementCollection
     @CollectionTable(name = "composers", joinColumns = @JoinColumn(name = "serial_id"))
-    @Column(name ="composer")
-    private List<String> composerList;
+    @Column(name = "composer")
+    private Set<String> composerList;
 
     @ElementCollection
     @CollectionTable(name = "operators", joinColumns = @JoinColumn(name = "serial_id"))
-    @Column(name ="operator")
-    private List<String> operatorList;
+    @Column(name = "operator")
+    private Set<String> operatorList;
 
     @ElementCollection
     @CollectionTable(name = "producers", joinColumns = @JoinColumn(name = "serial_id"))
-    @Column(name ="producer")
-    private List<String> producerList;
+    @Column(name = "producer")
+    private Set<String> producerList;
 
     @ElementCollection
     @CollectionTable(name = "actors", joinColumns = @JoinColumn(name = "serial_id"))
-    @Column(name ="actor")
-    private List<String> actorList;
+    @Column(name = "actor")
+    private Set<String> actorList;
 
     @ElementCollection
     @CollectionTable(name = "countries", joinColumns = @JoinColumn(name = "serial_id"))
-    @Column(name ="country")
-    private List<String> countryList;
+    @Column(name = "country")
+    private Set<String> countryList;
 
-    @Column(name ="premiere_date")
+    @Column(name = "premiere_date")
     private Date premiereDate;
 
-    @Column(name ="film_company")
+    @Column(name = "film_company")
     private String filmCompany;
 
     public String getName() {
@@ -91,11 +92,11 @@ public class Serial {
         this.description = description;
     }
 
-    public List<String> getGenreList() {
+    public Set<String> getGenreList() {
         return genreList;
     }
 
-    public void setGenreList(List<String> genreList) {
+    public void setGenreList(Set<String> genreList) {
         this.genreList = genreList;
     }
 
@@ -123,67 +124,67 @@ public class Serial {
         this.seasonsCount = seasonsCount;
     }
 
-    public List<Season> getSeasonList() {
+    public Set<Season> getSeasonList() {
         return seasonList;
     }
 
-    public void setSeasonList(List<Season> seasonList) {
+    public void setSeasonList(Set<Season> seasonList) {
         this.seasonList = seasonList;
     }
 
-    public List<String> getCreatorList() {
+    public Set<String> getCreatorList() {
         return creatorList;
     }
 
-    public void setCreatorList(List<String> creatorList) {
+    public void setCreatorList(Set<String> creatorList) {
         this.creatorList = creatorList;
     }
 
-    public List<String> getScreenwriterList() {
+    public Set<String> getScreenwriterList() {
         return screenwriterList;
     }
 
-    public void setScreenwriterList(List<String> screenwriterList) {
+    public void setScreenwriterList(Set<String> screenwriterList) {
         this.screenwriterList = screenwriterList;
     }
 
-    public List<String> getComposerList() {
+    public Set<String> getComposerList() {
         return composerList;
     }
 
-    public void setComposerList(List<String> composerList) {
+    public void setComposerList(Set<String> composerList) {
         this.composerList = composerList;
     }
 
-    public List<String> getOperatorList() {
+    public Set<String> getOperatorList() {
         return operatorList;
     }
 
-    public void setOperatorList(List<String> operatorList) {
+    public void setOperatorList(Set<String> operatorList) {
         this.operatorList = operatorList;
     }
 
-    public List<String> getProducerList() {
+    public Set<String> getProducerList() {
         return producerList;
     }
 
-    public void setProducerList(List<String> producerList) {
+    public void setProducerList(Set<String> producerList) {
         this.producerList = producerList;
     }
 
-    public List<String> getActorList() {
+    public Set<String> getActorList() {
         return actorList;
     }
 
-    public void setActorList(List<String> actorList) {
+    public void setActorList(Set<String> actorList) {
         this.actorList = actorList;
     }
 
-    public List<String> getCountryList() {
+    public Set<String> getCountryList() {
         return countryList;
     }
 
-    public void setCountryList(List<String> countryList) {
+    public void setCountryList(Set<String> countryList) {
         this.countryList = countryList;
     }
 

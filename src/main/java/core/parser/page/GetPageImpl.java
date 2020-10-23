@@ -13,7 +13,7 @@ public class GetPageImpl implements GetPage<Document> {
         try {
             doc = Jsoup.connect(url)
                     .userAgent("Chrome/4.0.249.0 Safari/532.5")
-                    .referrer("http://www.google.com")
+                    .timeout(0)
                     .get();
         } catch (IOException e) {
             e.printStackTrace();

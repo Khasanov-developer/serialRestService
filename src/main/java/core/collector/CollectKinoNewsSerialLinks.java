@@ -8,7 +8,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,15 +31,15 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
         return currentYear;
     }
 
-    public List<String> collectLinks(Document html) {
+    public Set<String> collectLinks(Document html) {
 
-        List<String> allLinks = new ArrayList<>();
+        Set<String> allLinks = new HashSet<>();
         int year = parseInt(getCurrentYear(html));
 
         Document currentHtml = html;
         while (year < 2021) {
             allLinks.addAll(getCurrentYearSerialLinks(currentHtml));
-            String nextYearLink = getNextYearLink(html);
+            String nextYearLink = getNextYearLink(currentHtml);
             year++;
             currentHtml = getPage.getPage(nextYearLink);
         }
@@ -45,8 +47,8 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
     }
 
     @Override
-    public List<String> getCurrentYearSerialLinks(Document html) {
-        List<String> links = new ArrayList<>();
+    public Set<String> getCurrentYearSerialLinks(Document html) {
+        Set<String> links = new HashSet<>();
 
         //Ссылки для текущей страницы списка сериалов
         Elements elements = html.select("div.zhanr_left > a");

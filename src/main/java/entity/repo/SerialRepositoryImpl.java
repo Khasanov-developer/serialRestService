@@ -6,6 +6,8 @@ import entity.dto.Serial;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.util.List;
+import java.util.Objects;
 
 
 public class SerialRepositoryImpl implements SerialRepository{
@@ -23,20 +25,28 @@ public class SerialRepositoryImpl implements SerialRepository{
 
     @Override
     public Serial getSerialByName(String name) {
-        TypedQuery<Serial> q = em.createQuery("SELECT s FROM Serial s WHERE s.name = :name", Serial.class);
-        q.setParameter("name", name);
-        return q.getSingleResult();
+        List<Serial> serials = em.createQuery("SELECT s FROM Serial s WHERE s.name = :name", Serial.class)
+                .setParameter("name", name)
+                .getResultList();
+
+        if (serials.isEmpty()) {
+            return null;
+        } else {
+            return serials.get(0);
+        }
     }
 
     @Override
     public Serial saveSerial(Serial serial) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        if (serial.getId() == null) {
-            em.persist(serial);
-        } else {
+
+        if (Objects.nonNull(getSerialByName(serial.getName()))) {
             serial = em.merge(serial);
+        } else {
+            em.persist(serial);
         }
+
         transaction.commit();
         return serial;
     }
