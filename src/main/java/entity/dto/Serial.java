@@ -1,11 +1,15 @@
 package entity.dto;
 
+import org.hibernate.annotations.SelectBeforeUpdate;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "serial")
 @Entity
+@SelectBeforeUpdate
 public class Serial {
 
     @Id
@@ -33,22 +37,22 @@ public class Serial {
     private Integer seasonsCount;
 
     @OneToMany(mappedBy = "serial", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Season> seasonList;
+    private Set<Season> seasonSet = new HashSet<>();
 
     @ElementCollection
     @CollectionTable(name = "creators", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "creator")
-    private Set<String> creatorList;
+    private Set<String> creatorSet;
 
     @ElementCollection
     @CollectionTable(name = "screenwriters", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "screenwriter")
-    private Set<String> screenwriterList;
+    private Set<String> screenwriterSet;
 
     @ElementCollection
     @CollectionTable(name = "composers", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "composer")
-    private Set<String> composerList;
+    private Set<String> composerSet;
 
     @ElementCollection
     @CollectionTable(name = "operators", joinColumns = @JoinColumn(name = "serial_id"))
@@ -58,17 +62,17 @@ public class Serial {
     @ElementCollection
     @CollectionTable(name = "producers", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "producer")
-    private Set<String> producerList;
+    private Set<String> producerSet;
 
     @ElementCollection
     @CollectionTable(name = "actors", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "actor")
-    private Set<String> actorList;
+    private Set<String> actorSet;
 
     @ElementCollection
     @CollectionTable(name = "countries", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "country")
-    private Set<String> countryList;
+    private Set<String> countrySet;
 
     @Column(name = "premiere_date")
     private Date premiereDate;
@@ -124,36 +128,36 @@ public class Serial {
         this.seasonsCount = seasonsCount;
     }
 
-    public Set<Season> getSeasonList() {
-        return seasonList;
+    public Set<Season> getSeasonSet() {
+        return seasonSet;
     }
 
-    public void setSeasonList(Set<Season> seasonList) {
-        this.seasonList = seasonList;
+    public void setSeasonSet(Set<Season> seasonList) {
+        this.seasonSet = seasonList;
     }
 
-    public Set<String> getCreatorList() {
-        return creatorList;
+    public Set<String> getCreatorSet() {
+        return creatorSet;
     }
 
-    public void setCreatorList(Set<String> creatorList) {
-        this.creatorList = creatorList;
+    public void setCreatorSet(Set<String> creatorList) {
+        this.creatorSet = creatorList;
     }
 
-    public Set<String> getScreenwriterList() {
-        return screenwriterList;
+    public Set<String> getScreenwriterSet() {
+        return screenwriterSet;
     }
 
-    public void setScreenwriterList(Set<String> screenwriterList) {
-        this.screenwriterList = screenwriterList;
+    public void setScreenwriterSet(Set<String> screenwriterList) {
+        this.screenwriterSet = screenwriterList;
     }
 
-    public Set<String> getComposerList() {
-        return composerList;
+    public Set<String> getComposerSet() {
+        return composerSet;
     }
 
-    public void setComposerList(Set<String> composerList) {
-        this.composerList = composerList;
+    public void setComposerSet(Set<String> composerList) {
+        this.composerSet = composerList;
     }
 
     public Set<String> getOperatorList() {
@@ -164,28 +168,28 @@ public class Serial {
         this.operatorList = operatorList;
     }
 
-    public Set<String> getProducerList() {
-        return producerList;
+    public Set<String> getProducerSet() {
+        return producerSet;
     }
 
-    public void setProducerList(Set<String> producerList) {
-        this.producerList = producerList;
+    public void setProducerSet(Set<String> producerList) {
+        this.producerSet = producerList;
     }
 
-    public Set<String> getActorList() {
-        return actorList;
+    public Set<String> getActorSet() {
+        return actorSet;
     }
 
-    public void setActorList(Set<String> actorList) {
-        this.actorList = actorList;
+    public void setActorSet(Set<String> actorList) {
+        this.actorSet = actorList;
     }
 
-    public Set<String> getCountryList() {
-        return countryList;
+    public Set<String> getCountrySet() {
+        return countrySet;
     }
 
-    public void setCountryList(Set<String> countryList) {
-        this.countryList = countryList;
+    public void setCountrySet(Set<String> countryList) {
+        this.countrySet = countryList;
     }
 
     public Date getPremiereDate() {

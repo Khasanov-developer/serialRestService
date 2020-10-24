@@ -13,8 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class TestCollectorLinks {
 
@@ -39,7 +38,7 @@ public class TestCollectorLinks {
 
     // Сбор ссылок и парсинг сериалов и сохранение в базу
     public static void main(String[] args) throws IOException {
-        Document linksDoc = Jsoup.connect("https://www.kinonews.ru/serials-year1941/").userAgent("Mozilla").get();
+        Document linksDoc = Jsoup.connect("https://www.kinonews.ru/serials-year2021/").userAgent("Mozilla").get();
         CollectKinoNewsSerialLinks linksCollector = new CollectKinoNewsSerialLinks();
 
         Set<String> links = linksCollector.collectLinks(linksDoc);
@@ -48,6 +47,7 @@ public class TestCollectorLinks {
         KinoNewsParser<Document> parser;
 
         int counter = 0;
+        System.out.println(links.size());
 
         for (String link : links) {
             Document mainHtml = getPage.getPage(link);
@@ -60,8 +60,6 @@ public class TestCollectorLinks {
             System.out.println(link);
             Serial serial = parser.parse();
             repository.saveSerial(serial);
-            counter++;
-            if (counter % 100 == 0) System.out.println(counter);
         }
 
 

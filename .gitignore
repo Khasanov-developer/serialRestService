@@ -4,3 +4,4 @@
 *.iml
 /src/main/resources/hibernate.cfg.xml
 *.txt
+*.sql

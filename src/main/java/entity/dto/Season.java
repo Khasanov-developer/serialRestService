@@ -2,6 +2,7 @@ package entity.dto;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "season")
@@ -29,7 +30,7 @@ public class Season {
     private Serial serial;
 
     @OneToMany(mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Seria> seriaList;
+    private Set<Seria> seriaSet = new HashSet<>();
 
     public Integer getNumber() {
         return number;
@@ -63,12 +64,12 @@ public class Season {
         this.seriesCount = seriesCount;
     }
 
-    public Set<Seria> getSeriaList() {
-        return seriaList;
+    public Set<Seria> getSeriaSet() {
+        return seriaSet;
     }
 
-    public void setSeriaList(Set<Seria> seriaList) {
-        this.seriaList = seriaList;
+    public void setSeriaSet(Set<Seria> seriaList) {
+        this.seriaSet = seriaList;
     }
 
     public Season() {
@@ -76,5 +77,13 @@ public class Season {
 
     public Long getId() {
         return id;
+    }
+
+    public Serial getSerial() {
+        return serial;
+    }
+
+    public void setSerial(Serial serial) {
+        this.serial = serial;
     }
 }

@@ -37,7 +37,7 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
         int year = parseInt(getCurrentYear(html));
 
         Document currentHtml = html;
-        while (year < 2021) {
+        while (year < 2022) {
             allLinks.addAll(getCurrentYearSerialLinks(currentHtml));
             String nextYearLink = getNextYearLink(currentHtml);
             year++;

@@ -61,14 +61,12 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
     void parseSeasons(Document html, Serial serial) {
         Elements seasonElements = html.getElementsByClass("text");
         if (seasonElements.size() > 0) {
-            Set<Season> seasons = new HashSet<>();
 
             for (Element seasonElement : seasonElements) {
-                seasons.add(parseSeason(seasonElement));
+                serial.getSeasonSet().add(parseSeason(seasonElement, serial));
             }
 
-            serial.setSeasonList(seasons);
-            serial.setSeasonsCount(seasons.size());
+            serial.setSeasonsCount(serial.getSeasonSet().size());
         }
     }
 
@@ -76,7 +74,7 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
     void parseCreators(Document html, Serial serial) {
         Elements elements = html.select("div.stramplua:contains(Режиссеры) ~ div");
         if (elements.size() > 0) {
-            serial.setCreatorList(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
+            serial.setCreatorSet(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
         }
     }
 
@@ -84,7 +82,7 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
     void parseScreenWriter(Document html, Serial serial) {
         Elements elements = html.select("div.stramplua:contains(Сценаристы) ~ div");
         if (elements.size() > 0) {
-            serial.setScreenwriterList(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
+            serial.setScreenwriterSet(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
         }
     }
 
@@ -92,7 +90,7 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
     void parseComposers(Document html, Serial serial) {
         Elements elements = html.select("div.stramplua:contains(Композиторы) ~ div");
         if (elements.size() > 0) {
-            serial.setComposerList(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
+            serial.setComposerSet(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
         }
     }
 
@@ -108,7 +106,7 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
     void parseProducers(Document html, Serial serial) {
         Elements elements = html.select("div.stramplua:contains(Продюсеры) ~ div");
         if (elements.size() > 0) {
-            serial.setProducerList(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
+            serial.setProducerSet(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
         }
     }
 
@@ -116,7 +114,7 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
     void parseActors(Document html, Serial serial) {
         Elements elements = html.select("div.stramplua:contains(Актеры) ~ div");
         if (elements.size() > 0) {
-            serial.setActorList(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
+            serial.setActorSet(elements.first().select("h3 > a").stream().map(Element::text).collect(Collectors.toSet()));
         }
     }
 
@@ -126,7 +124,7 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
         if (elements.size() > 0) {
             String countriesData = elements.get(0).text().split("Страна:\\s")[1];
             String[] countriesArr = countriesData.split(",");
-            serial.setCountryList(Arrays.stream(countriesArr).map(String::trim).collect(Collectors.toSet()));
+            serial.setCountrySet(Arrays.stream(countriesArr).map(String::trim).collect(Collectors.toSet()));
         }
     }
 
@@ -152,8 +150,9 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
         }
     }
 
-    private Season parseSeason(Element seasonElement) {
+    private Season parseSeason(Element seasonElement, Serial serial) {
         Season season = new Season();
+        season.setSerial(serial);
         Elements elements = seasonElement.getElementsByClass("btext14");
         if (elements.size() > 0) {
             String seasonData = elements.get(0).text();
@@ -177,20 +176,19 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
             //parseSeria
             Elements elementsByTag = seasonElement.getElementsByTag("tr");
             if (elementsByTag.size() > 0) {
-                Set<Seria> seriaList = new HashSet<>();
                 for (Element seriaElem : elementsByTag) {
-                    seriaList.add(parseSeria(seriaElem));
+                    season.getSeriaSet().add(parseSeria(seriaElem, season));
                 }
-                season.setSeriesCount(seriaList.size());
-                season.setSeriaList(seriaList);
+                season.setSeriesCount(season.getSeriaSet().size());
             }
         }
 
         return season;
     }
 
-    private Seria parseSeria(Element seriaElement) {
+    private Seria parseSeria(Element seriaElement, Season season) {
         Seria seria = new Seria();
+        seria.setSeason(season);
 
         Elements tdElems = seriaElement.getElementsByTag("td");
 

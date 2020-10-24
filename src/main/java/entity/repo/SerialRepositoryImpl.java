@@ -40,7 +40,8 @@ public class SerialRepositoryImpl implements SerialRepository{
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        if (Objects.isNull(getSerialByName(serial.getName()))) {
+        Serial serialByName = getSerialByName(serial.getName());
+        if (Objects.isNull(serialByName)) {
             em.persist(serial);
         } else {
             serial = em.merge(serial);

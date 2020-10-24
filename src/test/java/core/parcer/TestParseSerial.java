@@ -33,7 +33,7 @@ public class TestParseSerial {
 
         System.out.println();
 
-        for (String s : serial.getCountryList()) {
+        for (String s : serial.getCountrySet()) {
             System.out.println(s);
         }
 
@@ -45,27 +45,27 @@ public class TestParseSerial {
 
         System.out.println();
 
-        if (serial.getCreatorList() != null && serial.getCreatorList().size() > 0) {
+        if (serial.getCreatorSet() != null && serial.getCreatorSet().size() > 0) {
             System.out.println("Режиссеры");
-            for (String s : serial.getCreatorList()) {
+            for (String s : serial.getCreatorSet()) {
                 System.out.println(s);
             }
         }
 
         System.out.println();
 
-        if (serial.getScreenwriterList() != null && serial.getScreenwriterList().size() > 0) {
+        if (serial.getScreenwriterSet() != null && serial.getScreenwriterSet().size() > 0) {
             System.out.println("Сценаристы");
-            for (String s : serial.getScreenwriterList()) {
+            for (String s : serial.getScreenwriterSet()) {
                 System.out.println(s);
             }
         }
 
         System.out.println();
 
-        if (serial.getProducerList() != null && serial.getProducerList().size() > 0) {
+        if (serial.getProducerSet() != null && serial.getProducerSet().size() > 0) {
             System.out.println("Продюссеры");
-            for (String s : serial.getProducerList()) {
+            for (String s : serial.getProducerSet()) {
                 System.out.println(s);
             }
         }
@@ -81,24 +81,24 @@ public class TestParseSerial {
 
         System.out.println();
 
-        if (serial.getComposerList() != null && serial.getComposerList().size() > 0) {
+        if (serial.getComposerSet() != null && serial.getComposerSet().size() > 0) {
             System.out.println("Композиторы");
-            for (String s : serial.getComposerList()) {
+            for (String s : serial.getComposerSet()) {
                 System.out.println(s);
             }
         }
 
         System.out.println();
 
-        if (serial.getActorList() != null && serial.getActorList().size() > 0) {
+        if (serial.getActorSet() != null && serial.getActorSet().size() > 0) {
             System.out.println("Актеры");
-            for (String s : serial.getActorList()) {
+            for (String s : serial.getActorSet()) {
                 System.out.println(s);
             }
         }
 
-        if (serial.getSeasonList() != null && serial.getSeasonList().size() > 0) {
-            for (Season season : serial.getSeasonList()) {
+        if (serial.getSeasonSet() != null && serial.getSeasonSet().size() > 0) {
+            for (Season season : serial.getSeasonSet()) {
                 System.out.print(season.getNumber());
                 System.out.print(" ");
                 System.out.print(season.getSeriesCount());
@@ -107,7 +107,7 @@ public class TestParseSerial {
                 System.out.print(" ");
                 System.out.println(season.getFinishDate());
 
-                for (Seria seria : season.getSeriaList()) {
+                for (Seria seria : season.getSeriaSet()) {
                     System.out.print(seria.getNumber());
                     System.out.print(" ");
                     System.out.print(seria.getName());

@@ -54,4 +54,12 @@ public class Seria {
 
     public Seria() {
     }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
+    }
 }
