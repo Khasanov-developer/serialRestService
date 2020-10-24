@@ -12,8 +12,8 @@ public class SerialRestController {
 
     public SerialRestController(SerialRepository repository) {
         this.repository = repository;
-        get(path, (req, res) -> {
-            String name = req.queryMap().get("serial").get("name").value().replace("_", " ");
+        get(path+"/name/:name", (req, res) -> {
+            String name = req.params(":name").replace("_", " ");
             Serial serial = repository.getSerialByName(name);
             return serial;
         }, JsonUtil.json());
