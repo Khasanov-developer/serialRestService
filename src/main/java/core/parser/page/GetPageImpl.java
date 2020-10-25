@@ -1,5 +1,6 @@
 package core.parser.page;
 
+import com.sun.istack.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 public class GetPageImpl implements GetPage<Document> {
 
     @Override
+    @Nullable
     public Document getPage(String url) {
         Document doc = null;
         try {

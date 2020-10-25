@@ -19,9 +19,8 @@ public class TestSpark {
     }
 
     public static void main(String[] args) {
-        port(5432);
-        String name1 = "Danger";
-        get("/hello", (req, res) -> getSerialByName(name1));
+
+        get("/hello", (req, res) -> getSerialByName("Danger"));
     }
 
     public static Serial getSerialByName(String name) {

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class KinoNewsLinkFormer {
 
-    private static final String URL = "https://www.kinonews.ru/";
+    private static final String URL = LinkProvider.getLink();
     private static final Pattern pattern = Pattern.compile("serial_(?<id>\\d+)\\/");
 
     public static String getSerialId(String url) {

@@ -1,3 +1,4 @@
+import core.utils.LinkProvider;
 import entity.dto.Season;
 import entity.dto.Seria;
 import entity.dto.Serial;
@@ -15,15 +16,15 @@ public class TestMain {
 
     public static void main(String[] args) throws ParseException {
 
-        SerialRepository repository = new SerialRepositoryImpl();
-        Serial serial = new Serial();
-        serial.setName("Тест");
-        repository.saveSerial(serial);
-
-        Serial serialByName = repository.getSerialByName("Тест");
-        System.out.println(serialByName.getName());
-
-        repository.deleteSerial(serial);
+//        SerialRepository repository = new SerialRepositoryImpl();
+//        Serial serial = new Serial();
+//        serial.setName("Тест");
+//        repository.saveSerial(serial);
+//
+//        Serial serialByName = repository.getSerialByName("Тест");
+//        System.out.println(serialByName.getName());
+//
+//        repository.deleteSerial(serial);
 
 //        Serial serial = new Serial();
 //        serial.setName("Во все тяжкие 2");
@@ -55,5 +56,8 @@ public class TestMain {
 //        serial.setSeasonList(seasonList);
 //
 //        repository.saveSerial(serial);
+
+        LinkProvider link = new LinkProvider();
+        System.out.println(link.getLink());
     }
 }

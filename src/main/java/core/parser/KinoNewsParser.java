@@ -3,9 +3,8 @@ package core.parser;
 import entity.dto.Serial;
 
 import java.text.SimpleDateFormat;
-import java.util.regex.Pattern;
 
-public abstract class KinoNewsParser<From> implements ParseSerial {
+public abstract class KinoNewsParser<From> implements SerialParser {
 
     protected From mainHtml;
     protected From seasonsHtml;
