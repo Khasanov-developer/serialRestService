@@ -1,16 +1,6 @@
-import core.utils.LinkProvider;
-import entity.dto.Season;
-import entity.dto.Seria;
-import entity.dto.Serial;
-import entity.repo.SerialRepository;
-import entity.repo.SerialRepositoryImpl;
+import core.utils.Configs;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 
 public class TestMain {
 
@@ -57,7 +47,6 @@ public class TestMain {
 //
 //        repository.saveSerial(serial);
 
-        LinkProvider link = new LinkProvider();
-        System.out.println(link.getLink());
+        System.out.println(Configs.getLink());
     }
 }

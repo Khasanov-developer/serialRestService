@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class LinkProvider {
+public class Configs {
 
     private static Properties prop = null;
 
-    private LinkProvider() {
+    private Configs() {
     }
 
     public static String getLink() {
-        return getProps().getProperty("KinonewsLink");
+        return getProps().getProperty("kinonews.url");
     }
 
     public static Properties getProps() {
@@ -26,5 +26,9 @@ public class LinkProvider {
             }
         }
         return prop;
+    }
+
+    public static String getDateFormat() {
+        return getProps().getProperty("date.format");
     }
 }

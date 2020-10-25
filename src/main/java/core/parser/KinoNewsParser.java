@@ -1,5 +1,6 @@
 package core.parser;
 
+import core.utils.Configs;
 import entity.dto.Serial;
 
 import java.text.SimpleDateFormat;
@@ -10,7 +11,7 @@ public abstract class KinoNewsParser<From> implements SerialParser {
     protected From seasonsHtml;
     protected From allPersonsHtml;
     protected static final String datePattern = "\\d{2}\\.\\d{2}\\.\\d{4}";
-    protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    protected static final SimpleDateFormat dateFormat = new SimpleDateFormat(Configs.getDateFormat());
 
     KinoNewsParser(From mainHtml, From seasonsHtml, From allPersonsHtml) {
         this.mainHtml = mainHtml;
