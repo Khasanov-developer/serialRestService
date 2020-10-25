@@ -1,5 +1,8 @@
 package entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
@@ -9,26 +12,33 @@ import java.util.Set;
 @Entity
 public class Season {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonProperty
     @Column
     private Integer number;
 
+    @JsonProperty
     @Column(name = "start_date")
     private Date startDate;
 
+    @JsonProperty
     @Column(name = "finish_date")
     private Date finishDate;
 
+    @JsonProperty
     @Column(name = "series_count")
     private Integer seriesCount;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "serial_id")
     private Serial serial;
 
+    @JsonProperty("episodes")
     @OneToMany(mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Seria> seriaSet = new HashSet<>();
 

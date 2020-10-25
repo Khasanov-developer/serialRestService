@@ -217,5 +217,4 @@ public class KinoNewsJsoupParser extends KinoNewsParser<Document> {
 
         return seria;
     }
-
 }

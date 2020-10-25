@@ -81,7 +81,5 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
         String nextYearLink = nextYearLinks.attr("abs:href");
         return nextYearLink;
     }
-
-
 }
 

@@ -12,6 +12,7 @@ public class SerialRestController {
 
     public SerialRestController(SerialRepository repository) {
         this.repository = repository;
+
         get(path+"/name/:name", (req, res) -> {
             String name = req.params(":name").replace("_", " ");
             Serial serial = repository.getSerialByName(name);

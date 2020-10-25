@@ -1,82 +1,101 @@
 package entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Table(name = "serial")
 @Entity
 @SelectBeforeUpdate
 public class Serial {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonProperty
     @Column(nullable = false)
     private String name;
 
+    @JsonProperty
     @Column(length = 5000)
     private String description;
 
+    @JsonProperty("genres")
     @ElementCollection
     @CollectionTable(name = "genres", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "genre")
     private Set<String> genreList;
 
+    @JsonProperty
     @Column(name = "start_year")
     private String startYear;
 
+    @JsonProperty
     @Column(name = "finish_year")
     private String finishYear;
 
+    @JsonProperty
     @Column(name = "seasons_count")
     private Integer seasonsCount;
 
+    @JsonProperty("seasons")
     @OneToMany(mappedBy = "serial", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Season> seasonSet = new HashSet<>();
 
+    @JsonProperty("creators")
     @ElementCollection
     @CollectionTable(name = "creators", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "creator")
     private Set<String> creatorSet;
 
+    @JsonProperty("screenwriters")
     @ElementCollection
     @CollectionTable(name = "screenwriters", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "screenwriter")
     private Set<String> screenwriterSet;
 
+    @JsonProperty("composers")
     @ElementCollection
     @CollectionTable(name = "composers", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "composer")
     private Set<String> composerSet;
 
+    @JsonProperty("operators")
     @ElementCollection
     @CollectionTable(name = "operators", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "operator")
     private Set<String> operatorList;
 
+    @JsonProperty("producers")
     @ElementCollection
     @CollectionTable(name = "producers", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "producer")
     private Set<String> producerSet;
 
+    @JsonProperty("actors")
     @ElementCollection
     @CollectionTable(name = "actors", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "actor")
     private Set<String> actorSet;
 
+    @JsonProperty("countries")
     @ElementCollection
     @CollectionTable(name = "countries", joinColumns = @JoinColumn(name = "serial_id"))
     @Column(name = "country")
     private Set<String> countrySet;
 
+    @JsonProperty
     @Column(name = "premiere_date")
     private Date premiereDate;
 
+    @JsonProperty
     @Column(name = "film_company")
     private String filmCompany;
 

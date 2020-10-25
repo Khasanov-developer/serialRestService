@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class SerialRepositoryImpl implements SerialRepository{
+public class SerialRepositoryImpl implements SerialRepository {
 
     private final EntityManager em;
 
@@ -67,8 +67,7 @@ public class SerialRepositoryImpl implements SerialRepository{
 
     @Override
     public List<Serial> getAll() {
-        List<Serial> serials = em.createQuery("FROM Serial", Serial.class)
+        return em.createQuery("FROM Serial", Serial.class)
                 .getResultList();
-        return serials;
     }
 }

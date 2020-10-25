@@ -1,5 +1,8 @@
 package entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -7,19 +10,24 @@ import java.sql.Date;
 @Entity
 public class Seria {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonProperty
     @Column
     private Integer number;
 
+    @JsonProperty
     @Column
     private String name;
 
+    @JsonProperty
     @Column
     private Date date;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "season_id")
     private Season season;
