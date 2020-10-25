@@ -2,6 +2,6 @@ package core.parser;
 
 import entity.dto.Serial;
 
-public interface ParseSerial {
+public interface SerialParser {
     Serial parse();
 }
