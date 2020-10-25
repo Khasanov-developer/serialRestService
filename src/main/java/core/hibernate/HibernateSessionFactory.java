@@ -10,24 +10,13 @@ public class HibernateSessionFactory {
 
     private static SessionFactory sessionFactory = null;
 
-    private HibernateSessionFactory(){
+    private HibernateSessionFactory() {
     }
 
     private static SessionFactory buildSessionFactory() {
-        try {
-            // Create the ServiceRegistry from hibernate.cfg.xml
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .configure("hibernate.cfg.xml").build();
-
-            // Create a metadata sources using the specified service registry.
-            Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
-
-            return metadata.getSessionFactoryBuilder().build();
-        } catch (Throwable ex) {
-
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+        Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
+        return metadata.getSessionFactoryBuilder().build();
     }
 
     public static SessionFactory getSessionFactory() {
@@ -39,7 +28,6 @@ public class HibernateSessionFactory {
     }
 
     public static void shutdown() {
-        // Close caches and connection pools
         getSessionFactory().close();
     }
 }
