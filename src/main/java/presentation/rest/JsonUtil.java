@@ -2,7 +2,6 @@ package presentation.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import core.utils.Configs;
 import spark.ResponseTransformer;
 
@@ -13,7 +12,8 @@ class JsonUtil {
 
     private static ObjectMapper mapper = null;
 
-    private JsonUtil(){}
+    private JsonUtil() {
+    }
 
     public static String toJson(Object object) throws JsonProcessingException {
         return getMapper().writeValueAsString(object);

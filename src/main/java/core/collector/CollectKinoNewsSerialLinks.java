@@ -22,17 +22,6 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
     private static final String NEXT_BUTTON = "https://www.kinonews.ru/images2/page-right-active.png";
     private static final int FINAL_YEAR_FOR_PARSE = 2022;
 
-    private String getCurrentYear(Document html) {
-        Elements years = html.select(TITLE_THIS_YEAR);
-        String currentYear = years.first().text();
-        Pattern yearPattern = Pattern.compile(THIS_YEAR_REGEX);
-        Matcher yearMatcher = yearPattern.matcher(currentYear);
-        while (yearMatcher.find()) {
-            currentYear = yearMatcher.group(0);
-        }
-        return currentYear;
-    }
-
     @Override
     public Set<String> collectLinks(Document html) {
 
@@ -47,6 +36,17 @@ public class CollectKinoNewsSerialLinks implements ParseSerialLinks<Document> {
             currentHtml = getPage.getPage(nextYearLink);
         }
         return allLinks;
+    }
+
+    private String getCurrentYear(Document html) {
+        Elements years = html.select(TITLE_THIS_YEAR);
+        String currentYear = years.first().text();
+        Pattern yearPattern = Pattern.compile(THIS_YEAR_REGEX);
+        Matcher yearMatcher = yearPattern.matcher(currentYear);
+        while (yearMatcher.find()) {
+            currentYear = yearMatcher.group(0);
+        }
+        return currentYear;
     }
 
     private Set<String> getCurrentYearSerialLinks(Document html) {

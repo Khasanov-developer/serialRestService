@@ -12,10 +12,6 @@ public class Configs {
     private Configs() {
     }
 
-    public static String getLink() {
-        return getProps().getProperty("kinonews.url");
-    }
-
     public static Properties getProps() {
         if (prop == null) {
             try (InputStream input = new FileInputStream("src/main/resources/config.properties")) {
@@ -26,6 +22,10 @@ public class Configs {
             }
         }
         return prop;
+    }
+
+    public static String getLink() {
+        return getProps().getProperty("kinonews.url");
     }
 
     public static String getDateFormat() {

@@ -22,9 +22,8 @@ public class SerialRestController {
         get(path + "/name/:name", (req, res) -> {
             res.type("application/json");
             Serial serialByName = repository.getSerialByName(req.params(":name").replace("_", " "));
-            if (Objects.nonNull(serialByName)) {
-                return serialByName;
-            }
+
+            if (Objects.nonNull(serialByName)) return serialByName;
             return new Message(MESSAGE_404, CODE_404);
         }, JsonUtil.json());
 
@@ -36,9 +35,8 @@ public class SerialRestController {
         get(path + "/id/:id", (req, res) -> {
             res.type("application/json");
             Serial serialById = repository.getSerialById(Long.parseLong(req.params(":id")));
-            if (Objects.nonNull(serialById)) {
-                return serialById;
-            }
+
+            if (Objects.nonNull(serialById)) return serialById;
             return new Message(MESSAGE_404, CODE_404);
         }, JsonUtil.json());
 
@@ -47,9 +45,8 @@ public class SerialRestController {
             res.type("application/json");
             Season seasonBySerialIdAndSeasonNumber = repository.getSeasonBySerialIdAndSeasonNumber(Long.parseLong(req.params(":id")),
                     Integer.parseInt(req.params(":number")));
-            if (Objects.nonNull(seasonBySerialIdAndSeasonNumber)) {
-                return seasonBySerialIdAndSeasonNumber;
-            }
+
+            if (Objects.nonNull(seasonBySerialIdAndSeasonNumber)) return seasonBySerialIdAndSeasonNumber;
             return new Message(MESSAGE_404, CODE_404);
         }, JsonUtil.json());
 
@@ -57,9 +54,8 @@ public class SerialRestController {
             res.type("application/json");
             Season seasonBySerialNameAndSeasonNumber = repository.getSeasonBySerialNameAndSeasonNumber(req.params(":name").replace("_", " "),
                     Integer.parseInt(req.params(":number")));
-            if (Objects.nonNull(seasonBySerialNameAndSeasonNumber)) {
-                return seasonBySerialNameAndSeasonNumber;
-            }
+
+            if (Objects.nonNull(seasonBySerialNameAndSeasonNumber)) return seasonBySerialNameAndSeasonNumber;
             return new Message(MESSAGE_404, CODE_404);
         }, JsonUtil.json());
 
@@ -67,9 +63,8 @@ public class SerialRestController {
             res.type("application/json");
             Set<Season> seasonSet = repository.getSerialById(Long.parseLong(req.params(":id")))
                     .getSeasonSet();
-            if (!seasonSet.isEmpty()) {
-                return seasonSet;
-            }
+
+            if (!seasonSet.isEmpty()) return seasonSet;
             return new Message(MESSAGE_404, CODE_404);
         }, JsonUtil.json());
 
@@ -77,9 +72,8 @@ public class SerialRestController {
             res.type("application/json");
             Set<Season> seasonSet = repository.getSerialByName(req.params(":name").replace("_", " "))
                     .getSeasonSet();
-            if (!seasonSet.isEmpty()) {
-                return seasonSet;
-            }
+
+            if (!seasonSet.isEmpty()) return seasonSet;
             return new Message(MESSAGE_404, CODE_404);
         }, JsonUtil.json());
     }

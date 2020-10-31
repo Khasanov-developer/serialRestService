@@ -16,4 +16,9 @@ public class HibernateEntityManagerFactory {
         em = HibernateSessionFactory.getSessionFactory().createEntityManager();
         return em;
     }
+
+    public static void close() {
+        getEntityManager().close();
+        HibernateSessionFactory.close();
+    }
 }

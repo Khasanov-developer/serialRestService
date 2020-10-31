@@ -8,14 +8,14 @@ public class KinoNewsLinkFormer {
     private static final String URL = Configs.getLink();
     private static final Pattern pattern = Pattern.compile("serial_(?<id>\\d+)\\/");
 
-    public static String getSerialId(String url) {
+    public static String getSerialId(String url) throws IllegalArgumentException {
         Matcher matcher = pattern.matcher(url);
         String ret = "";
         while (matcher.find()) {
             ret = matcher.group("id");
         }
         if (ret.isEmpty()) throw new IllegalArgumentException("url не соотвествует паттерну! url:" + url);
-        else return ret;
+        return ret;
     }
 
     public static String getSeasonsLink(String serialId) {
