@@ -1,6 +1,7 @@
 package entity.repo;
 
 import core.hibernate.HibernateEntityManagerFactory;
+import entity.dto.Season;
 import entity.dto.Serial;
 
 import javax.persistence.EntityManager;
@@ -69,5 +70,33 @@ public class SerialRepositoryImpl implements SerialRepository {
     public List<Serial> getAll() {
         return em.createQuery("FROM Serial", Serial.class)
                 .getResultList();
+    }
+
+    @Override
+    public Season getSeasonBySerialIdAndSeasonNumber(Long serialId, Integer seasonNumber) {
+        List<Season> seasonList = em.createQuery("FROM Season WHERE serial.id = :id AND number = :number", Season.class)
+                .setParameter("id", serialId)
+                .setParameter("number", seasonNumber)
+                .getResultList();
+
+        if (seasonList.isEmpty()) {
+            return null;
+        } else {
+            return seasonList.get(0);
+        }
+    }
+
+    @Override
+    public Season getSeasonBySerialNameAndSeasonNumber(String name, Integer seasonNumber) {
+        List<Season> seasonList = em.createQuery("FROM Season WHERE serial.name = :name AND number = :number", Season.class)
+                .setParameter("name", name)
+                .setParameter("number", seasonNumber)
+                .getResultList();
+
+        if (seasonList.isEmpty()) {
+            return null;
+        } else {
+            return seasonList.get(0);
+        }
     }
 }
