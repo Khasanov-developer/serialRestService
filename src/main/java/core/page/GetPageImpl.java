@@ -1,4 +1,4 @@
-package core.parser.page;
+package core.page;
 
 import com.sun.istack.Nullable;
 import org.jsoup.Jsoup;

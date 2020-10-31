@@ -1,8 +1,8 @@
 package core.collector;
 
 
-import core.parser.page.GetPage;
-import core.parser.page.GetPageImpl;
+import core.page.GetPage;
+import core.page.GetPageImpl;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

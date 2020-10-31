@@ -2,8 +2,8 @@ package core.parcer;
 
 import core.parser.KinoNewsJsoupParser;
 import core.parser.KinoNewsParser;
-import core.parser.page.GetPage;
-import core.parser.page.GetPageImpl;
+import core.page.GetPage;
+import core.page.GetPageImpl;
 import entity.dto.Season;
 import entity.dto.Seria;
 import entity.dto.Serial;
